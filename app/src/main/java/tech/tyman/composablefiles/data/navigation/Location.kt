@@ -10,10 +10,7 @@ import tech.tyman.composablefiles.utils.urlEncode
 
 @Parcelize
 @Serializable
-data class Location(
-    val fileSystem: FileSystemType,
-    val path: String
-) : Parcelable {
+data class Location(val fileSystem: FileSystemType, val path: String) : Parcelable {
     val navUrl: String
         get() = "directory/${Json.encodeToString(this).urlEncode()}"
 }

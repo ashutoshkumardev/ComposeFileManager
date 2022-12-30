@@ -1,7 +1,3 @@
-import java.io.File
-import java.io.FileInputStream
-import java.util.*
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -10,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "tech.tyman.composablefiles"
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
 
         val appVersionCode: Int by rootProject.extra
         val appVersion: String by rootProject.extra
@@ -28,44 +24,44 @@ android {
         }
     }
 
-    if (System.getenv().get("CI") != "true") {
-        // Create a variable called keystorePropertiesFile, and initialize it to your
-        // keystore.properties file, in the rootProject folder.
-        val keystorePropertiesFile = rootProject.file("keystore.properties")
-
-        // Initialize a new Properties() object called keystoreProperties.
-        val keystoreProperties = Properties()
-
-        // Load your keystore.properties file into the keystoreProperties object.
-        keystoreProperties.load(FileInputStream(keystorePropertiesFile))
-
-        val releaseKeyAlias: String by keystoreProperties
-        val releaseKeyPassword: String by keystoreProperties
-        val releaseStoreFile: String by keystoreProperties
-        val releaseStorePassword: String by keystoreProperties
-
-        signingConfigs {
-            create("release") {
-                keyAlias = releaseKeyAlias
-                keyPassword = releaseKeyPassword
-                storeFile = file(releaseStoreFile)
-                storePassword = releaseStorePassword
-
-                enableV1Signing = true
-                enableV2Signing = true
-                enableV3Signing = true
-                enableV4Signing = true
-            }
-        }
-    }
+//    if (System.getenv().get("CI") != "true") {
+//        // Create a variable called keystorePropertiesFile, and initialize it to your
+//        // keystore.properties file, in the rootProject folder.
+//        val keystorePropertiesFile = rootProject.file("keystore.properties")
+//
+//        // Initialize a new Properties() object called keystoreProperties.
+//        val keystoreProperties = Properties()
+//
+//        // Load your keystore.properties file into the keystoreProperties object.
+//        keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+//
+//        val releaseKeyAlias: String by keystoreProperties
+//        val releaseKeyPassword: String by keystoreProperties
+//        val releaseStoreFile: String by keystoreProperties
+//        val releaseStorePassword: String by keystoreProperties
+//
+//        signingConfigs {
+//            create("release") {
+//                keyAlias = releaseKeyAlias
+//                keyPassword = releaseKeyPassword
+//                storeFile = file(releaseStoreFile)
+//                storePassword = releaseStorePassword
+//
+//                enableV1Signing = true
+//                enableV2Signing = true
+//                enableV3Signing = true
+//                enableV4Signing = true
+//            }
+//        }
+//    }
 
     buildTypes {
         release {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            if (System.getenv().get("CI") != "true") {
-                signingConfig = signingConfigs.getByName("release")
-            }
+//            if (System.getenv().get("CI") != "true") {
+//                signingConfig = signingConfigs.getByName("release")
+//            }
         }
     }
 
@@ -102,6 +98,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
     implementation("androidx.activity:activity-compose:1.4.0")
+    implementation("androidx.compose.material:material:1.3.1")
     debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$composeVersion")
 

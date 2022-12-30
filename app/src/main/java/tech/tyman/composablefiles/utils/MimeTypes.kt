@@ -16,9 +16,7 @@ val DirectoryEntry.iconInfo: Pair<ImageVector, String> get() {
     } else if (extensionIconMap.containsKey(this.extension)) { // Check for overridden file extensions
         extensionIconMap[this.extension]!!
     } else { // Otherwise, check the mime type
-        mimeTypeIconMap[
-                MimeTypeMap.getSingleton().getMimeTypeFromExtension(this.extension)
-        ] ?: (Icons.Filled.QuestionMark to "Unknown") // If an unrecognized mime type, resort to "Unknown"
+        mimeTypeIconMap[MimeTypeMap.getSingleton().getMimeTypeFromExtension(this.extension)] ?: (Icons.Filled.QuestionMark to "Unknown") // If an unrecognized mime type, resort to "Unknown"
     }
 }
 

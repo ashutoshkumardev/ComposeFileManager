@@ -9,18 +9,13 @@ class LocalFileSystem : FileSystem() {
     override fun load() = Unit
 }
 
-class LocalFileSystemEntry(
-    override val fileSystem: FileSystem,
-    private val javaFile: File
-) : FileSystemEntry() {
+class LocalFileSystemEntry(override val fileSystem: FileSystem, private val javaFile: File) : FileSystemEntry() {
     override val path: String = javaFile.absolutePath
     override val name: String = javaFile.name
     override val extension: String = javaFile.extension
     override val lastModified: Long = javaFile.lastModified()
     override val isDirectory: Boolean = javaFile.isDirectory
-
     override fun readBytes(): ByteArray = javaFile.readBytes()
-
     override fun writeBytes(data: ByteArray): Boolean {
         javaFile.writeBytes(data)
         return true
